@@ -29,35 +29,33 @@ const Navbar = () => {
         }
     }
     return (
-        <div className='bg-white'>
+        <div className='bg-black'>
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>
                 <div>
-                    <h1 className='text-2xl font-bold'>Job<span className='text-[#F83002]'>Portal</span></h1>
+                    <h1 className='text-2xl font-bold text-white'>Job<span className='text-[#F83002]'>Portal</span></h1>
                 </div>
                 <div className='flex items-center gap-12'>
-                    <ul className='flex font-medium items-center gap-5'>
+                    <ul className='flex font-medium items-center gap-5 text-white'>
                         {
                             user && user.role === 'recruiter' ? (
                                 <>
-                                    <li><Link to="/admin/companies">Companies</Link></li>
-                                    <li><Link to="/admin/jobs">Jobs</Link></li>
+                                    <li><Link to="/admin/companies" className='hover:text-gray-400'>Companies</Link></li>
+                                    <li><Link to="/admin/jobs" className='hover:text-gray-400'>Jobs</Link></li>
                                 </>
                             ) : (
                                 <>
-                                    <li><Link to="/">Home</Link></li>
-                                    <li><Link to="/jobs">Jobs</Link></li>
-                                    <li><Link to="/browse">Browse</Link></li>
+                                    <li><Link to="/" className='hover:text-gray-400'>Home</Link></li>
+                                    <li><Link to="/jobs" className='hover:text-gray-400'>Jobs</Link></li>
+                                    <li><Link to="/browse" className='hover:text-gray-400'>Browse</Link></li>
                                 </>
                             )
                         }
-
-
                     </ul>
                     {
                         !user ? (
                             <div className='flex items-center gap-2'>
-                                <Link to="/login"><Button variant="outline">Login</Button></Link>
-                                <Link to="/signup"><Button className="bg-[#6A38C2] hover:bg-[#5b30a6]">Signup</Button></Link>
+                                <Link to="/login"><Button variant="outline" className="text-white border-white hover:bg-white text-black">Login</Button></Link>
+                                <Link to="/signup"><Button className="bg-[#6A38C2] hover:bg-[#5b30a6] text-white">Signup</Button></Link>
                             </div>
                         ) : (
                             <Popover>
@@ -67,7 +65,7 @@ const Navbar = () => {
                                     </Avatar>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-80">
-                                    <div className=''>
+                                    <div>
                                         <div className='flex gap-2 space-y-2'>
                                             <Avatar className="cursor-pointer">
                                                 <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
@@ -82,7 +80,7 @@ const Navbar = () => {
                                                 user && user.role === 'student' && (
                                                     <div className='flex w-fit items-center gap-2 cursor-pointer'>
                                                         <User2 />
-                                                        <Button variant="link"> <Link to="/profile">View Profile</Link></Button>
+                                                        <Button variant="link"><Link to="/profile">View Profile</Link></Button>
                                                     </div>
                                                 )
                                             }
@@ -100,7 +98,6 @@ const Navbar = () => {
 
                 </div>
             </div>
-
         </div>
     )
 }

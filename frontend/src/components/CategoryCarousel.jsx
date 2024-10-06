@@ -16,28 +16,35 @@ const category = [
 const CategoryCarousel = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const searchJobHandler = (query) => {
         dispatch(setSearchedQuery(query));
         navigate("/browse");
     }
 
     return (
-        <div>
-            <Carousel className="w-full max-w-xl mx-auto my-20">
+        <div className='bg-black py-10'>
+            <Carousel className="w-full max-w-xl mx-auto my-0">
                 <CarouselContent>
                     {
                         category.map((cat, index) => (
-                            <CarouselItem className="md:basis-1/2 lg-basis-1/3">
-                                <Button onClick={()=>searchJobHandler(cat)} variant="outline" className="rounded-full">{cat}</Button>
+                            <CarouselItem key={index} className="md:basis-1/2 lg-basis-1/3">
+                                <Button 
+                                    onClick={() => searchJobHandler(cat)} 
+                                    variant="outline" 
+                                    className="rounded-full border-gray-600 bg-[#6A38C2] text-white"
+                                >
+                                    {cat}
+                                </Button>
                             </CarouselItem>
                         ))
                     }
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="text-black opacity-100" />  {/* Always visible */}
+                <CarouselNext className="text-black opacity-100" />      {/* Always visible */}
             </Carousel>
         </div>
     )
 }
 
-export default CategoryCarousel
+export default CategoryCarousel;

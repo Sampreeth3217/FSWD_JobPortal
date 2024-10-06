@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from './shared/Navbar'
-import FilterCard from './FilterCard'
+import React, { useEffect, useState } from 'react';
+import Navbar from './shared/Navbar';
+import FilterCard from './FilterCard';
 import Job from './Job';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
-
-// const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const Jobs = () => {
     const { allJobs, searchedQuery } = useSelector(store => store.job);
@@ -16,25 +14,27 @@ const Jobs = () => {
             const filteredJobs = allJobs.filter((job) => {
                 return job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
                     job.description.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-                    job.location.toLowerCase().includes(searchedQuery.toLowerCase())
-            })
-            setFilterJobs(filteredJobs)
+                    job.location.toLowerCase().includes(searchedQuery.toLowerCase());
+            });
+            setFilterJobs(filteredJobs);
         } else {
-            setFilterJobs(allJobs)
+            setFilterJobs(allJobs);
         }
     }, [allJobs, searchedQuery]);
 
     return (
-        <div>
+        <div className='bg-black text-white min-h-screen'>
             <Navbar />
             <div className='max-w-7xl mx-auto mt-5'>
                 <div className='flex gap-5'>
-                    <div className='w-20%'>
+                    <div className='w-1/4'>
                         <FilterCard />
                     </div>
-                    {
-                        filterJobs.length <= 0 ? <span>Job not found</span> : (
-                            <div className='flex-1 h-[88vh] overflow-y-auto pb-5'>
+                    <div className='flex-1 h-[88vh] overflow-y-auto pb-5'>
+                        {
+                            filterJobs.length <= 0 ? (
+                                <span className='text-gray-400'>Job not found</span>
+                            ) : (
                                 <div className='grid grid-cols-3 gap-4'>
                                     {
                                         filterJobs.map((job) => (
@@ -49,15 +49,13 @@ const Jobs = () => {
                                         ))
                                     }
                                 </div>
-                            </div>
-                        )
-                    }
+                            )
+                        }
+                    </div>
                 </div>
             </div>
-
-
         </div>
-    )
+    );
 }
 
-export default Jobs
+export default Jobs;
