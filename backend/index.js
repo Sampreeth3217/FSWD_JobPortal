@@ -24,7 +24,7 @@ app.use(cookieParser());
 // app.use(cors());
 app.use(cors({
     origin: 'http://localhost:5173', // Set the correct origin
-    origin: 'https://fswd-job-portal.vercel.app', // Set the correct origin
+    origin: 'https://statesman-alpha.vercel.app', // Set the correct origin
     credentials: true // Allow credentials (cookies, etc.)
   }));
 const PORT = process.env.PORT || 3000;
