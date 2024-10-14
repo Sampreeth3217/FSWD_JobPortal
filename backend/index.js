@@ -21,7 +21,7 @@ app.use(cookieParser());
 //     credentials:true
 // }
 
-app.use(cors({origin:"https://statesman-alpha.vercel.app/"}));
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
