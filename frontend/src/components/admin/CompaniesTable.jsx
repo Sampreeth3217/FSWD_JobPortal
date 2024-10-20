@@ -7,8 +7,9 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const CompaniesTable = () => {
-    const { companies, searchCompanyByText } = useSelector(store => store.company);
-    const [filterCompany, setFilterCompany] = useState(companies);
+    const { companies = [], searchCompanyByText } = useSelector(store => store.company);
+    const [filterCompany, setFilterCompany] = useState([]);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,7 +19,7 @@ const CompaniesTable = () => {
             }
             return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase());
         });
-        setFilterCompany(filteredCompany);
+        setFilterCompany(filteredCompany || []);  // Ensure filteredCompany is an array
     }, [companies, searchCompanyByText]);
 
     return (
@@ -35,7 +36,7 @@ const CompaniesTable = () => {
                 </TableHeader>
                 <TableBody>
                     {
-                        filterCompany?.map((company) => (
+                        filterCompany.length > 0 ? filterCompany.map((company) => (
                             <TableRow key={company._id} className="hover:bg-gray-700 transition-colors duration-200">
                                 <TableCell>
                                     <Avatar>
@@ -58,7 +59,11 @@ const CompaniesTable = () => {
                                     </Popover>
                                 </TableCell>
                             </TableRow>
-                        ))
+                        )) : (
+                            <TableRow>
+                                <TableCell colSpan={4} className="text-center text-white">No companies found</TableCell>
+                            </TableRow>
+                        )
                     }
                 </TableBody>
             </Table>
